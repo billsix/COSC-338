@@ -1,5 +1,8 @@
 Agenda 05 FEB 2020
 
+- remention slack.  Instructions are in this repo "Slack Instructions.txt"
+  I am making announcements regarding the class there.  I highly
+  recommend that people join that channel.
 - go over demo 14 - as far as I can go.
 
 - cover blocking vs non-blocking io. Describe how you are using tail.
