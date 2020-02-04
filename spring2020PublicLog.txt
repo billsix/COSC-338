@@ -1,3 +1,64 @@
+Notes from 03 FEB 2020
+
+Covered 2D rotations again, this time from a calc1 point of view.
+For reference, https://www.alanzucconi.com/2016/02/03/2d-rotations/
+Showed on the board how to put those into matrix form, and how
+to view the columns of that matrix as the points where the x axis (1,0)
+and y axis (0 1), go.  I will need to go over this more later, as
+matrix representations of 2D, and 3D, rotations will be on exams,
+even though day to day graphics programmming does not require
+knowledge of the representation.
+
+Covered demo 11 - 14, from the camera space demo up to
+introducing a z coordinate.  Show how in Demo 13, if you reverse
+the order of rendering, and draw the blue square first, then
+the blue square will always be hidden behind the purple paddle.
+And likewise in reverse.  This is leading up to discussing the
+z buffer and how it allows for order-independent rendering of
+the polygons, while retaining the fact that near objects
+obscure far objects.
+
+Covered the right hand rule, and used that as a basis for
+showing what rotating around the x axis means, rotating
+around the y axis means, and rotating around the z axis means.
+The ability to create a matrix for rot_x, rot_y, and rot_z,
+can easily be deduced from first principles, and that is
+by knowing the right hand rule, describing where the
+first component goes [1       [cos(theta)
+                      0]  ->   sin(theta)]
+second component goes [0        [-sin(theta)
+                       1]  ->    cos(theta)]
+
+resulting in matrix
+  [cos(theta), -sin(theta)
+   sin(theta), cos(theta)]
+
+From the right and rule and this concept of rotating on a
+plane (yz, zx, xy), the 3D rotation matrices are easy to deduce.
+
+Discussed that from modelspace to world space, the method-chained
+method calls should be read backwards, by envisioning a moving coordinate
+system (origin, plus x and y axis), that translates and rotates.
+
+Covered Python keyword arguments, as a way of seeing the argument's to
+a called function at the function-call site.
+
+Showed demos modelviewprojection/mvpVisualization/demo.py
+modelviewprojection/mvpVisualization/demoAnimation.py
+modelviewprojection/mvpVisualization/demoViewWorldTopLevel.py
+to demonstrate what's happening.  Too many books show the transformations
+abstractly from one space to another, without seeing the geometry transformed.
+The Modelviewprojection codebase is meant to rectify that, while using
+the opengl superbible v4 (which is an excellent book), to cover the rest
+(colors, lighting, shadows, selection, textures, VAOs/VBOs/shaders.
+
+I got feedback that given the paddle/square demos, that the concepts of
+what I am doing with the method chaining are starting to click.
+This is good, because although the codebase doesn't do anything fancy,
+and it doesn't look good, it covers everything that students need to
+know about relative objects, world space, and camera space.  And too
+much pretty pictures and complex geometry would obfuscate the concept.
+
 Notes from 29 JAN 2020
 Covered from demo 6 - 10, camera management.
 Covered making a directed acyclic graph on
