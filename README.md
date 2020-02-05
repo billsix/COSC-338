@@ -7,8 +7,8 @@ Source
 ------
 
 The Source code for the OpenGL SuperBible v4 is under SB-AllSource/.
-Currently, I ported it to build on modern linux, Visual Studio 2019.  Still
-should port to MacOS, but have not done that yet
+Currently, I ported it to build on modern linux, Visual Studio 2019, and to MacOS/Xcode
+
 
 Other Useful Sites for Study
 ----------------------------
