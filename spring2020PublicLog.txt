@@ -1,3 +1,47 @@
+Notes from 05 FEB 2020
+
+Covered demo 14, 15, and showed 16 run but not the code.
+Discussed Depth test, which is not enabled in 14, which means
+that the blue square is always drawn, even though the z value
+is further away.  Showed how demo15 solved it by enabling
+and using the depth buffer, which acts similarly to the
+color buffer, in that every frame of the event loop has
+the value reset every frame to a default value.
+Discussed that for the depth buffer, besides a default
+value needing to be set per fragment, a test must also be specified to determine
+if a fragment, needs to determin in the rendered geometry is
+closer or further away than the existing geometry.
+For instance, in the purple paddle is drawn first in the frame,
+and then the blue square is drawn, but some of the pixels overlap,
+depending on the value in the depth buffer for the exising purple
+paddle, and depending on the depth value of the blue square, and
+depending on the test set, the blue pixel will either be set
+and the color of the fragment will be updated, or the blue color
+will be discarded and the purple color and depth value (in NDC)
+will remain.
+
+Discussed how view space transformations are the least intuitive
+aspect of graphics programming, because of the two viewpoints
+(when you are driving, is the earth and everything on earth spinning,
+or is the earth staying still and your car is moving?)
+I recommend, and have extensive notes in demo14, on thinking
+about the camera just like any other objects, by a series
+of transformations to the local coordinate system.  But, in order
+to conver the geometry of an object from world space to camera space,
+you must invert the transformation sequence from camera space to world
+space, thus creating a transformation sequence from world space
+to camera space.
+
+Showed mvpVisualization/demoViewWorldTopLevel.py to demostrate
+that the camera moves to it's position (without moving the geometry),
+but then inverts all of the transformations, this time bringing
+the whole scene with it.
+
+Demo 14 and 15 were the first (IMHO) poorly designed demos,
+as they covered too much.  Each demo should fix 1 to 2 things from
+the previous demo, and this one was too ambitious.  I need
+to fix it to make it easy to read on one's own time.
+
 Notes from 03 FEB 2020
 
 Covered 2D rotations again, this time from a calc1 point of view.
