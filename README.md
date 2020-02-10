@@ -83,6 +83,11 @@ Other Useful Sites for Study
 
   * https://github.com/amsimoes/rubik-opengl
 
+* Code the classics
+
+  * https://github.com/Wireframe-Magazine/Code-the-Classics
+  * https://wireframe.raspberrypi.org/books/code-the-classics1
+
 
 Other great resources
 

@@ -1,0 +1,42 @@
+DUE 17 FEB 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+Hints for solving.  Look at ../spring2020PublicLog.txt.  Also read
+the demos that were covered, especially the comments.
+
+1) (10 points) What is the name of the additional axis, besides x and y?
+
+2) (10 points) Given that in NDC, positive x goes to the right, positive y
+ goes up, does positive z come out of the monitor or go into the monitor?
+
+3) (10 points) Math in general, and OpenGL, use the right-hand rule for coordinate systems.  True or False.
+
+4) (15 points) In 2D space, write down the equation for rotating objects around the origin
+ by theta
+
+x'(x,y,theta) =
+y'(x,y,theta) =
+
+5) (10 points) From demo15, In order to allow programmers to ensure that objects further away
+ from the camera don't overwrite nearer objects in the framebuffer,
+ what test must enabled?  What 4 function calls must be made?  (Search the file
+ multiple times for the word "depth")
+
+6) (15 points) Looking at mvp/images/demo11.png, in which camera space is defined
+ in terms of world space, when transforming vertices from
+ paddle2 space to NDC, which of the functions must be inverted?
+ Options: f1 f2 f3
+
+7) (15 points) If j(x) = f(g(h(x))), for unspecified but assumed invertible
+ functions f, g, and h, what is the inverse of j?
+ j^-1(x) =
+
+8) (15 points) From demo14
+       world_space=   camera_space.rotate_x(moving_camera_rot_x)
+                                  .rotate_y(moving_camera_rot_y)
+                                  .translate(tx=moving_camera_x,
+                                             ty=moving_camera_y,
+                                             tz=moving_camera_z)
+      what is the method-chained solution for turning geometry from
+      world space into camera space?
