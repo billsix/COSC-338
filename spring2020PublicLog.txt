@@ -30,6 +30,22 @@ once (instead of for all three objects, like in the previous demos),
 sets the camera space once, and to place objects relative to
 the world space, you just have to describe relative coordinates.
 
+Covered the frustum, nearZ, farZ, top and left.  Discussed that
+top will be half of 45 degrees, as our eyes see about 45 degress
+vertically.  So what should left be?  Depends on the aspect
+ratio of the monitor/framebuffer/viewport.  Some people may
+have really wide monitors, and therefore, the front face
+of the frustum should be much wider than it is tall.
+This allows, say in games like FPS, for people with a wider
+monitor to see more of the enemies.
+In previous demos in 2D, to keep the paddles proportional,
+we limited drawing to a subset of the screen that is always
+square.
+By making the front face of the frustum be proportional to
+the monitor used, we keep proportionality of objects
+in perspective mode, by scaling the front face to NDC,
+which will then be converted to screen space appropriately.
+
 Notes from 05 FEB 2020
 
 Covered demo 14, 15, and showed 16 run but not the code.
