@@ -1,13 +1,5 @@
-Agenda 10 FEB 2020
+Agenda 17 FEB 2020
 
-- Announce homework due 17 FEB, homework/due17FEB2020.txt
-- Regover highlights from demo 14.
-  - re show mvpVisualization/demoViewWorldTopLevel.py
-- go over 15 again, emphasize what enabled the depth test
-- cover demo 16, the perspective projection.  This is
-  what makes computer graphics look realistic, instead
-  of like a blueprint diagram
-  - show mvpVisualization/demoPerspective.py
 - go over demo 17, making a stack of transformations using lambdas
   to avoid repetitive code.  For the purposes of understanding,
   don't worry if you don't fully understand the lambda parts.
@@ -18,10 +10,6 @@ Agenda 10 FEB 2020
   were actually written, before OpenGL 3.3 core profile.
   Discuss push matrix, pop matrix, but don't go into the math
   just yet
-
-- go over demo 14 - as far as I can go.
-
-- cover blocking vs non-blocking io. Describe how you are using tail.
 
 
 

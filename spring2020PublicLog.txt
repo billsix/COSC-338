@@ -1,3 +1,35 @@
+Notes from 10 FEB
+
+Annouced homework due 17 FEB, homework/due17FEB2020.txt
+Showed demo14 again, to show that cameraspace is moved
+to world space so that their -1 to 1 spaces match.
+To explain again, the camera can be placed in a space
+in the scene just like anything else, read the transformations
+backwards.  But, since we need to take the world space
+coordinates and turn them into camera space, we do
+the inverse of the operations; by reversing their
+order and negating the arguments.
+
+Spoke about demo 15 again, and how the depth test
+enables us to render the objects in any order, while
+preserving the fact that objects nearer to the camera
+will be visible, and will hide objects behind them.
+
+Showed demo16, the first demo which actually works
+like a normal first-person game.
+
+Showed mvpVisualization/demoPerspective.py, my best demo,
+which shows how the frustum can be turned into a rectangular
+prism, which (via ortho), can be converted into NDC.  Anything
+outside of NDC will be clipped out, and not drawn into the framebuffer,
+hence, will never be turned into screen coordinates.
+
+Quickly, and unthoroughly, discussed that demo17 removes
+repetition in the code, by setting the perspective projection
+once (instead of for all three objects, like in the previous demos),
+sets the camera space once, and to place objects relative to
+the world space, you just have to describe relative coordinates.
+
 Notes from 05 FEB 2020
 
 Covered demo 14, 15, and showed 16 run but not the code.
