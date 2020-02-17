@@ -1,0 +1,35 @@
+Purpose:
+
+To demonstrate that you can put geometry where you want to
+
+Take Demo16 as a base for 1 and 2, Demo19 as the base for
+3 and 4.
+
+This will involve making a loop.  If you think in degrees,
+convert to radians using math.radians(amount_in_degrees).
+Also, since Python is highly dependent on whitespace, when
+you add a loop to a section of code that used to be without
+a loop, you want to make sure that you indent the now-looped
+section correctly.  See if Visual Studio has a method by
+which to indent a selected region.  I do this with emacs
+"C-c >" or "C-c <"
+
+1) (15 points) Change the distance of the blue square to be 50 units
+away instead of 20
+
+2) (35 points) Make 4 blue squares instead of 1, each of which is 90 degrees
+apart.
+
+
+
+For doing it with demo19
+
+This one will be similar to the above, but you will need to be able
+to hold onto a current axis set and revert back to it using glpushmatrix/glpopmatrix
+using the model stack, or use the auxillary PushMatrix class in demo19/pyMatrixStack.
+
+3) (15 points) Change the distance of the blue square to be 50 units
+away instead of 20
+
+4) (35 points) Make 4 blue squares instead of 1, each of which is 90 degrees
+apart.
