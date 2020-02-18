@@ -1,3 +1,21 @@
+Notes from 17 FEB
+
+Announced project 2, which is based off of material covered
+today, demo19.
+Covered demo17, which minimized code duplication
+by means of a function stack.  Since functions
+on the stack are last-in first-applied, we can
+now read the modelspace to worldspace transformations
+from the top of the code down to the bottom of the code.
+The hardest part is still reading and understanding
+the world space to cameraspace transformations.
+Covered demo19, which uses openGL matricies in
+the same manner as the function stack, but better
+and more efficienct.  Covered glPushMatrix and glPopMatrix,
+to which I've alluded in the demos where I have a set
+of axises which are grayed out, but return to color
+later.  Like Branch from Trolls.
+
 Notes from 10 FEB
 
 Annouced homework due 17 FEB, homework/due17FEB2020.txt

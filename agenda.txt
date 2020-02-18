@@ -1,19 +1,6 @@
 Agenda 17 FEB 2020
 
-- annouce project2, due a week from today (project1 still doesn't
-  have a due date, apologies).
-  projects/project2Due24FEB2020.txt
-- go over demo 17, making a stack of transformations using lambdas
-  to avoid repetitive code.  For the purposes of understanding,
-  don't worry if you don't fully understand the lambda parts.
-  This section is just meant to be a bridge between the math
-  that we've been doing so far, to the model view and projection
-  matricies.
 - go over demo 18, movement in 3D space based off of the input.
-- go over demo 19, which is the standard way OpenGL programs
-  were actually written, before OpenGL 3.3 core profile.
-  Discuss push matrix, pop matrix, but don't go into the math
-  just yet
 - go over demo 19.5, using a controller to move around the space.
 
 

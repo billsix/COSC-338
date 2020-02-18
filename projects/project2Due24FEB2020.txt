@@ -18,7 +18,7 @@ which to indent a selected region.  I do this with emacs
 away instead of 20
 
 2) (35 points) Make 4 blue squares instead of 1, each of which is 90 degrees
-apart.
+apart, rotated on the z axis.
 
 
 
@@ -32,4 +32,4 @@ using the model stack, or use the auxillary PushMatrix class in demo19/pyMatrixS
 away instead of 20
 
 4) (35 points) Make 4 blue squares instead of 1, each of which is 90 degrees
-apart.
+apart, rotated on the z axis.
