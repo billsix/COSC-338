@@ -16,6 +16,9 @@ Other Useful Sites for Study
 * http://opengl-tutorial.org
   * https://github.com/opengl-tutorials/ogl
   * My branch with fixes regarding camera management on Linux https://github.com/billsix/ogl
+    * Verified Builds:
+      * Windows
+      * Linux
 
 * http://learnopengl.com
   * https://learnopengl.com/
@@ -34,6 +37,8 @@ Other Useful Sites for Study
 
   * Verified Builds:
     * Linux
+    * Windows
+       * built using cmake-gui.exe on the command line (stand-alone cmake instead of VS integrated cmake).  During setup, set win32 instea of x86_64.  After building project, click "Tools/Command Line/Developer Command Prompt".  cd to "Binaries".  type "..\build\Release\ExampleXX.exe"
 
 * Fogleman's 2 Minecraft Projects: Minecraft (Python, Fixed Function OpenGL), Craft (C, Shader-based OpenGL)
 
