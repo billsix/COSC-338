@@ -1,3 +1,73 @@
+Notes from 26 FEB
+
+Midterm will 11 MAR 2020.  Review session will be 09 MAR 2020,
+in class.
+
+Rewent over strafing, which is moving in the x direction
+instead of -1 units in the z.
+
+Added project3. projects/project3Due04MAR2020.txt  Due a week from today
+Added homework3.  homework/due04MAR2020.txt.  Due a week from today.  Busy week!
+(These should not be difficult)
+
+Compiled all demos from Chapter 3.  Ran them all and desribed
+what was happening.  Did not get a chance to step through much
+of the source code.  Spoke about differences between GLUT
+and GLFW (callback based framework vs library in which the
+programmer controls the event loop.  If missed class, the explanations
+within the book are more than sufficienct.
+
+In the book, because it does not have a moving camera in 3D space,
+nor do objects move, the modelview and projection matrix are
+set in the "resizewnidow" callback, and implicitly applied
+to the modelspace data sent into glVertex et. al. in the
+rendering callback.  (In my Python based demos, I always
+set the modelview and projection matricies to be the identity
+matrix so that this implied matrix multiplication was
+essentially a no-op (no operation, i.e. the identity function)
+
+A triangle has two faces, based on the ordering of the three vertices.
+For a triangle, the front face is, not surpringly, defined by the right
+hand rule, in opengl terms, it's "Counter clockwise".  The back face
+is the other.  The ordering can be reconfigured, as the book demonstrates.
+
+I like the right hand rule.  There will be questions on the test
+that assume that you know what the right hand rule is and can
+deduce things like front face, which way the zx plane rotates
+when calling "rotate_y"
+
+
+Notes from 24 FEB
+Covered demo 18, which is about making a moving camera.
+The position in x,y,z is calculated using the a vector in camera's
+local coordinate system, which is converted to world space
+using the view matrix.
+
+After this calculation, the view matrix is returned to
+it's originial state because the above operations were
+wrapped in a with GLPushMatrix block.
+
+Added mvpVisualization/demoPushMatrix.py to graphically
+show how glpushmatrix/popmatrix is used to solve project 2.
+
+Started the material from the OpenGL Blue Book, the superbible.
+Briefly read through chapter 1 and 2.  Discussed GLUT, which
+is like GLFW, but is more of a framework than a library, meaning
+that GLUT controls the event loop, and the programmer needs
+to a-priori specify the callbacks that should be called when
+GLUT notices events.  This is in contrast to GLFW, where
+the programmer retains control of the event loop.
+
+Will soon start assigning reading from the BlueBook, along with assigning
+homework questions based off of that reading.
+
+
+
+Notes from 19 FEB
+
+Covered same material as 17 FEB due to class absenses,
+as this material is important to understand.
+
 Notes from 17 FEB
 
 Announced project 2, which is based off of material covered

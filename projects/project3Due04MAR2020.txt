@@ -1,0 +1,26 @@
+Purpose:
+
+To demonstrate that you know how to move the camera by
+strafing (moving the camera sideways).
+
+This project should take no longer than a half hour.
+If having problems, email me.
+
+Take Demo18 as a base.  Look at how movement is defined
+when pressing the up and down keys, where the movement
+is defined relative to the camera space's -z units (well,
+it's not the full camera space, just the translate and rotate y)
+
+1) (25 points)Implement strafing by, when the user holds
+LEFT_SHIFT and presses left, move along the camera space's
+x axis by some multiple of -1.
+
+2) (25 points) If not pressing shift,
+the camera should be rotated like normal
+
+3) (25 points) Implement strafing by, when the user holds
+LEFT_SHIFT and presses right, move along the camera space's
+x axis by some multiple of 1.
+
+4) (25 points) If not pressing shift,
+the camera should be rotated like normal

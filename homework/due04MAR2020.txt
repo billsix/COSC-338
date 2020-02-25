@@ -1,0 +1,50 @@
+DUE 04 MAR 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+Read Chapter 1 of the OpenGL Superbible v4.  (you should figure out how
+to run the demo code too.  Email me if you need help)
+The answers are all directly from the book.  Read all of Chapter 1
+of the book.  You can literally read the first question, read the book
+until you find it, write in your answer, read the next question, read
+the book until you find it.
+
+1) (5 points)  What are the three dimensions of measurement?
+
+2) (5 points) Nearby objects appear larger than further away objects.  This
+perspective effect is called what?
+
+3) (5 points) What is the act of taking a geometric description of a three-dimensional
+object and turning it into an image of that object onscreen?
+
+4) (10 points) What is the name of the concept where front faces of an object obscure
+the back of the object from view?
+
+5) (10 points) Achieving a high level of realism with nothing buth thousands or missions of
+tiny lit and shaded polygons is a metter of brute force and a lot of hard
+work.  What clever techique allows you to use a simpler geometry but achieves
+a high level of realism?
+
+6) (5 points) What is the combination of colors or objects on the screen?
+
+7) (5 points) What is the name of the technique which smoothes out "jaggies"?
+
+8) (5 points) What is the name of the non-real-time 3D effect used to render
+frames, such as for movies like Toy Story and Shrek?
+
+9) (5 points) What is the state of the art in real-time computer graphics?
+(it was true in 2007 and mostly true today)
+
+10) (5 points) What is the origin of a Cartesion coordinate system in 2D
+
+11) (5 points) What is a primitive?
+
+12) (10 points) "The first concept you really need to understand is call projection".
+What is projection?
+
+13) (5 points) What is the viewing volume?
+
+14) (10 points) For orthographic projections, what are the six names that define
+the edges of the rectangular prism?
+
+15) (10 points) What is the name of the other type of projection?

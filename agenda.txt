@@ -1,8 +1,11 @@
-Agenda 17 FEB 2020
+Agenda 26 FEB 2020
+
+Cover chapter 3 of the OpenGL bluebook.
+
+Agenda 24 FEB 2020
 
 - go over demo 18, movement in 3D space based off of the input.
-- go over demo 19.5, using a controller to move around the space.
-
+- Start OpenGL Bluebook, plan to finish Chapter 2 with demos.
 
 
 Material to be covered at unknown date that may not be covered in the book:
