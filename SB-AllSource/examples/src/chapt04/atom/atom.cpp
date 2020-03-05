@@ -22,9 +22,9 @@ void RenderScene(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	// Translate the whole scene out and into view	
+	// Translate the whole scene out and into view
 	// This is the initial viewing transformation
-	glTranslatef(0.0f, 0.0f, -100.0f);	
+	glTranslatef(0.0f, 0.0f, -100.0f);
 
 	// Red Nucleus
 	glColor3ub(255, 0, 0);
@@ -45,7 +45,7 @@ void RenderScene(void)
 
 	// Draw the electron
 	glutSolidSphere(6.0f, 15, 15);
-    
+
 
 	// Restore the viewing transformation
 	glPopMatrix();
@@ -79,7 +79,7 @@ void RenderScene(void)
 
 
 // This function does any needed initialization on the rendering
-// context. 
+// context.
 void SetupRC()
 	{
 	glEnable(GL_DEPTH_TEST);	// Hidden surface removal
@@ -87,7 +87,7 @@ void SetupRC()
 	glEnable(GL_CULL_FACE);		// Do not calculate inside of jet
 
 	// Black background
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );	
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
     }
 
 void SpecialKeys(int key, int x, int y)
@@ -144,10 +144,10 @@ void ChangeSize(int w, int h)
     glLoadIdentity();
 
     // Establish clipping volume (left, right, bottom, top, near, far)
-    if (w <= h) 
-        glOrtho (-nRange, nRange, nRange*h/w, -nRange*h/w, -nRange*2.0f, nRange*2.0f);
-    else 
-        glOrtho (-nRange*w/h, nRange*w/h, nRange, -nRange, -nRange*2.0f, nRange*2.0f);
+    if (w <= h)
+        glOrtho (-nRange, nRange, -nRange*h/w, nRange*h/w, -nRange*2.0f, nRange*2.0f);
+    else
+        glOrtho (-nRange*w/h, nRange*w/h, -nRange, nRange, -nRange*2.0f, nRange*2.0f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
