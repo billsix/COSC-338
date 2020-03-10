@@ -139,7 +139,7 @@ transformations are written in the OpenGL program are changed.
                     -moving_camera_y,
                     -moving_camera_z)
 
-In what order will transformation 1 2 and 3 be applied to later-specified modelspace data?
+In what order will transformation 1 2 and 3 be applied to later-specified modelspace data (by the computer)?
 
 
 (10 points)
