@@ -1,3 +1,13 @@
+Notes as of 08 MAR.
+
+Mid term will be a take home exam, assigned on MON 09 MAR, due
+FRI 13 MAR (Midterm.txt).  If you have questions, I suggest
+reading through the comments in modelviewprojection's
+code.
+
+Class on 11 MAR is cancelled to allow more time for
+students to take the exam.
+
 Notes from 26 FEB
 
 Midterm will 11 MAR 2020.  Review session will be 09 MAR 2020,

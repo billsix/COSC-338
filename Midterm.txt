@@ -1,0 +1,350 @@
+DUE FRI 09 MAR 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+This is out of 265 points, which will be converted to a 100% scale in blackboard.
+
+(10 points)
+1) Computers can have different resolutions, and different numbers of pixels.  As such,
+we convert vertex data to a base coordinate system that is independent of screen-space,
+which OpenGL itself converts to screen space.
+What is the name of this coordinate system?  What are the ranges of values
+in x y and z for this space that will end up being rendered to the monitor?
+
+(5 points)
+2) OpenGL does not provide windowing, input, controller support etc.  What
+are the names of the two frameworks used in the class (one for modelviewprojection,
+one in the OpenGL superbible)
+
+(5 points)
+3) What is an event loop?
+
+(5 points)
+4) Is single buffering or double buffering more common?
+
+(10 points)
+5) In every iteration of the event loop, what two calls needs to be made to each of the
+modelview and projection matricies to ensure that they are in a standard, simple, state?
+What does that call do to the matrix?
+
+(10 points)
+6) If the programmer wants to describe verticies that have dimensions
+in some coordinate system that makes sense in the domain,  what "space"
+is that coordinate system typically, and generically, called?
+
+(10 points)
+7)  If the space from #6 is placed somewhere else relatively in a larger scene, the verticies
+in that space must _firstly_ be converted into what other space? (i.e., in the demos,
+what space is paddle1_space data firstly converted into?)
+
+(answer part a and b)
+8) The computer has no notion of nested/relative coordinate systems, the computer just
+manipulates a bunch of multidimensional numbers.  Since within the computer (regardless
+of how we think about transformations), rotations
+always happen around the origin (0,0,0),
+in which order do we read modelspace
+to world space transformations for the purposes of imagining
+a moving/rotating coordinate system, around which subsequent
+translations and rotations happen? ( answer for a and b directly below) (sorry for the
+run on sentence.  It's late at night.)
+
+(10 points)
+a) answer for the method-chained solution.
+   Should we read the following top down or bottom up?
+        world_space = model_space.rotate(paddle1.rotation) \
+                                 .translate(tx=paddle1.initial_position.x,
+                                            ty=paddle1.initial_position.y) \
+                                 .translate(tx=paddle1.input_offset_x,
+                                            ty=paddle1.input_offset_y)
+(10 points)
+b) answer for matrix stacks.
+   Should we read the following top down or bottom up?
+        ms.translate(ms.MatrixStack.model,
+                     paddle1.input_offset_x,
+                     paddle1.input_offset_y,
+                     0.0)
+        ms.translate(ms.MatrixStack.model,
+                     paddle1.initial_position[0],
+                     paddle1.initial_position[1],
+                     0.0)
+        ms.rotate_z(ms.MatrixStack.model,
+                    paddle1.rotation)
+
+
+(5 points)
+9) Rotation of a multidimensional point can be done by breaking the point into its components,
+as scalars, calculating where each axis (distance of 1) rotates to,
+and then multiplying the resulting
+vectors by their respective scalars of the source point, and then adding
+those vectors together to get one new point.  True or False.
+
+
+(15 points)
+10) When reading code to represent a translated/rotated "camera",
+(OpenGL has no camera, we just model one),
+the commented-out code allows us to think about where the camera
+is placed and it's orientation.  But the code that we need to
+type into the program to execute, to transform the geometry before rendering,
+is different.
+
+    # ms.translate(ms.MatrixStack.view,
+    #              moving_camera_x,
+    #              moving_camera_y,
+    #              moving_camera_z)
+    # ms.rotate_y(ms.MatrixStack.view,moving_camera_rot_y)
+    # ms.rotate_x(ms.MatrixStack.view,moving_camera_rot_x)
+    #
+
+    ms.rotate_x(ms.MatrixStack.view,-moving_camera_rot_x)
+    ms.rotate_y(ms.MatrixStack.view,-moving_camera_rot_y)
+    ms.translate(ms.MatrixStack.view,
+                 -moving_camera_x,
+                 -moving_camera_y,
+                 -moving_camera_z)
+
+Describe the relation between the commented out code
+and the code that executes.  (Give the math term, and the specifics
+of that math term in how we change the parameters and ordering of function calls)
+
+(5 points)
+11) When using a matrixstack, are operations such as rotate and translate and
+scale destructive, or non-destructive, to the current matrix?
+
+(15 points)
+12) When using a matrix stack, in order to draw multiple objects each of which
+are defined relative to a higher level object (i.e., four squares each
+defined relative to a paddle, each of the squares 90% apart (rotating on z)),
+what pair of functions do we need to call
+in order to save/restore the coordinate system of the higher level object, so
+that other sub-objects can be drawn correctly?
+(Hint, I used Python "with" syntax to automatically call the to functions
+on __enter__ and __exit__ of the block, and the gray axises in
+mvpVisualization/demoViewWorldTopLevel.py represented the saved axises)
+
+(15 points)
+13) By switching from the method chained solution for coordinate transformations
+to a lambda stack or matrix stack solution, the computer still calculates
+the transformations in the same order.  However, the order in which the
+transformations are written in the OpenGL program are changed.
+
+
+    import pyMatrixStack as ms
+    ...
+    ...
+    ...
+    1) ms.rotate_x(ms.MatrixStack.view,-moving_camera_rot_x)
+    2) ms.rotate_y(ms.MatrixStack.view,-moving_camera_rot_y)
+    3) ms.translate(ms.MatrixStack.view,
+                    -moving_camera_x,
+                    -moving_camera_y,
+                    -moving_camera_z)
+
+In what order will transformation 1 2 and 3 be applied to later-specified modelspace data?
+
+
+(10 points)
+13) When rotating by a small positive theta around the z axis, does the y axis
+rotate towards the x axis, or does the x axis rotate towards the y axis? What
+is the name of the rule that you can use to figure it out?
+(side note, both x and y rotate when rotating about the z axis,
+but if you know which direction one rotates,
+you also know the direction that the other rotates)
+
+
+(10 points)
+14) When rotating by a small positive theta around the x axis, does the y axis
+rotate towards the z axis, or does the z axis rotate towards the y axis? What
+is the name of the rule that you can use to figure it out?
+(side note, both y and z rotate when rotating about the z axis,
+but if you know which direction one rotates,
+you also know the direction that the other rotates)
+
+
+(answer parts a b c and d below)
+15) In mvpVisualization/demoViewWorldTopLevel.py, the visualization of the camera
+has two parts.  One part places the camera at its location and orients it
+while not moving any vertices.
+The other part moves the verticies.  In the code,
+animation time is used to determine what operations
+happen per frame.  A larger number means that more time has passed.
+
+Placing the camera (and the NDC around it) visually in the demo
+involves visualizing a moving/rotating coordinate system, as such:
+
+            if animation_time > 60:
+                ms.translate(ms.MatrixStack.model,
+                             virtual_camera_position[0]  * min(1.0, (animation_time - 60.0) / 5.0),
+                             virtual_camera_position[1]  * min(1.0, (animation_time - 60.0) / 5.0),
+                             virtual_camera_position[2]  * min(1.0, (animation_time - 60.0) / 5.0))
+            if animation_time > 65:
+                ms.rotate_y(ms.MatrixStack.model,
+                            virtual_camera_rot_y  * min(1.0, (animation_time - 65.0) / 5.0))
+            if animation_time > 70:
+               ms.rotate_x(ms.MatrixStack.model,
+                            virtual_camera_rot_x   * min(1.0, (animation_time - 70.0) / 5.0))
+            ...
+            ...(dot dot dot means other lines are there, but don't worry about them)
+            ...
+
+            draw_ndc() # draws a cube at the camera's position/orientation
+
+(10 points)
+a)  The poorly named "draw_ndc" function draws a cube in the camera's local space,
+by making a bunch of glVertex3f calls.  The implementation of glVertex3f (or perhaps glEnd), to
+which we don't have source access, must convert that modelspace data to NDC.
+From where must it get that transformation?
+
+(10 points)
+b) At animation_time 68, which transformations will be called (that you can see in the code
+listed above in this midterm, don't worry about the whole program) to the modelspace
+data?  What is the ordering that the computer performs
+the transformations? (i.e., which is called first etc)
+
+(10 points)
+c) At animation_time 73, what transformations will be called (that you can see in the code
+listed above) to the modelspace data?  What is the order that the computer
+performs the transformations? (i.e.,
+which is called first etc)
+
+(30 points)
+d) After the camera is placed and oriented correctly, all of the other verticies
+must be moved to the world space's coordinate system and oriented correctly, such
+that the NDC cube surrounding the camera's position and orientation matches
+the world space's position and orientation.
+
+    if(animation_time > 85.0):
+        ms.rotate_x(ms.MatrixStack.model,
+                    -virtual_camera_rot_x   * min(1.0, (animation_time - 85.0) / 5.0))
+    if(animation_time > 80.0):
+        ms.rotate_y(ms.MatrixStack.model,
+                    -virtual_camera_rot_y  * min(1.0, (animation_time - 80.0) / 5.0))
+    if(animation_time > 75.0):
+        ms.translate(ms.MatrixStack.model,
+                     -virtual_camera_position[0]   * min(1.0, (animation_time - 75.0) / 5.0),
+                     -virtual_camera_position[1]   * min(1.0, (animation_time - 75.0) / 5.0),
+                     -virtual_camera_position[2]   * min(1.0, (animation_time - 75.0) / 5.0))
+
+
+Unlike the code at the beginning of question 15, in which the time checks
+increase and we read down the code, in this code, the time checks are
+decreasing as we read down the code.  Why is necessary for the demo to make
+sense visually?  (For help in understanding,
+try modifying the code by replacing the 85's with 75's, and the 75's with 85's,
+and see what happens.)
+
+16)
+    def ortho(self,
+              left,
+              right,
+              bottom,
+              top,
+              near,
+              far):
+        midpoint_x, midpoint_y, midpoint_z = (left+right)/2.0, (bottom + top)/2.0, (near+far)/2.0
+        length_x, length_y, length_z = right - left, top - bottom, far - near
+        return self.translate(tx=-midpoint_x,
+                              ty=-midpoint_y,
+                              tz=-midpoint_z) \
+                   .scale(2.0/length_x,
+                          2.0/length_y,
+                          2.0/(-length_z))
+
+(5 points)
+a) Describe in general terms what the call to ortho does.
+
+(5 points)
+b) In this method chained form, should you read the transformations from top down
+or from bottom up? (running the demos
+under mvpVisualization/ can help with your answer)
+
+(5 points)
+c) If it were in matrixstack form, in which order would you read them?
+
+
+(5 points)
+17) If you were to accidently negate the bottom and top arguments in the code
+that calls ortho, so bottom is positive and top is negative, what would happen
+to the resulting image on the screen?
+
+(5 points)
+18)  What is the name of the shape that the perspective projection transforms
+into NDC?
+
+(5 points)
+19) In the following implementation of perspective projection,
+why is nearZ negated when calculating top?
+(if you need more info, study/modify demo16)
+
+    # caller of perspective
+    ...
+    ...
+    ...
+        return self.perspective(fov=45.0,
+                                aspectRatio=1.0,
+                                nearZ=-0.1,
+                                farZ=-10000.0)
+
+
+    def perspective(self, fov, aspectRatio, nearZ, farZ):
+        top = -nearZ * math.tan(math.radians(fov)/ 2.0)
+        right = top * aspectRatio
+
+        scaled_x = self.x / self.z * nearZ
+        scaled_y = self.y / self.z * nearZ
+        retangular_prism =  Vertex(scaled_x,
+                                   scaled_y,
+                                   self.z)
+
+        return retangular_prism.ortho(left = -right,
+                                      right = right,
+                                      bottom = -top,
+                                      top = top,
+                                      near = nearZ,
+                                      far= farZ)
+
+(5 points)
+20) Describe the difference in the two windowing/input libraries we've used
+in the class.  (regarding event loops, how events are handled, control flow etc)
+(My opinions about which is better is irrelevant; just articulate the differences
+in approach)
+
+
+(10 points)
+21)
+Open mvpVisualization/demoViewWorldTopLevel.py and search for "camera", and find
+all instances.  You'll find the camera1 ( moving_camera_r, moving_camera_rot_x,
+moving_camera_rot_y), and camera 2.
+Camera one manipulates the view matrix.
+Camera two manipulates the model matrix.
+a) Why are there two cameras in the implementation of this demo?
+b) normally, data goes through the model, then view, then projection transformations.
+3 major transformations.
+What sequence of transformations must this demo itself do, in order to show how
+the camera transformations happen?  (Hint, it's a sequence of transformations, where each
+element is model, view, or projection.  I'm not telling you the length
+of that sequence, you need to figure it and list them)
+
+An example answer in the right format, but wrong answer, would be:
+[model projection model view model view projection]
+
+
+(10 points)
+22)
+Run mvpVisualization/demoPerspective.py. (you don't need to look at the code,
+as it uses shaders, which we haven't covered yet, but will before end
+of semester.)
+
+Just like in 21, there are two cameras in the code, but we also see
+the region of geometry that is be squashed down to NDC.
+Like part b of 21, what is the sequence of transformations, in terms
+of model, view, projection, that the full demo implementation (which has
+two cameras) must do
+to visualize model, view, projection as observable steps?
+(Hint, it's a sequence of transformations, where each
+element is model, view, or projection.  I'm not telling you the length
+of that sequence, you need to figure it and list them)
+(Hint, I've made a "joke" about this in one of our communications channels,
+that likely made no sense to you at the time.)
+
+An example answer in the right format, but wrong answer, would be:
+[model projection model view model view projection]
