@@ -23,8 +23,10 @@ one in the OpenGL superbible)
 4) Is single buffering or double buffering more common?
 
 (10 points)
-5) In every iteration of the event loop, what two calls needs to be made to each of the
-modelview and projection matricies to ensure that they are in a standard, simple, state?
+5) In every iteration of the event loop, what call needs to be made to each of the
+model, view, and projection matricies to ensure that they are in a standard, simple, state?
+(Using example code from Python, not the opengl bluebook's use of matrix code).
+
 What does that call do to the matrix?
 
 (10 points)
