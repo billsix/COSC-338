@@ -1,0 +1,85 @@
+DUE 29 MAR 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+Read Chapter 3 of the OpenGL Superbible v4.  (you should figure out how
+to run the demo code too, and study the source, although that's
+not graded for this chapter.  Email me if you need help or have questions
+about it)
+
+The answers are all directly from the book.  Read all of Chapter 3
+of the book.  You can literally read the first question, read the book
+until you find it, write in your answer, read the next question, read
+the book until you find it.
+
+1) (5 points) What is the smallest element on your computer monitor?
+
+2) (5 points) When specifying glVertex2f, what are the default values for z and for w?
+
+3) (5 points) To draw points, what flag must be passed to glBegin()?
+
+4) (5 points) What function call changes the point size?
+
+5) (5 points) By default, are points affected by the perspective division?
+
+6) (5 points) Can glPointSize be called inside of glBegin/glEnd segments
+of code?
+
+7) (5 points) OpenGL functions can have parameters where only a
+certain range of values are acceptable.  If the caller provides a
+value outside of that range, what does OpenGL do to make the
+parameter within the range?
+
+8) (5 points) What do you pass to glBegin to create a line?
+
+9) (5 points) If you pass an odd number of vertices to when creating
+a sequence of lines, what happens to the last vertex?
+
+Skip reading section on line_strips.
+Skip approximating curves with straight lines.
+Skip line width
+skip line stippling.
+Continue reading on 94, Drawing triangles in 3D.
+
+10)(5 points)   What is the name of a closed shape that may or may
+not be filled in with the currently selected color, and is the
+basis for all solid-object composition in OpenGL?
+
+11) (5 points)  What parameter gets passed to glBegin to create triangles?
+
+12) (5 points)  What is the default color, should you not specify glColor?
+
+13) (5 points)  What is the name of "the combination of order and direction
+in which the vertices are specified"?
+
+14) (5 points)  OpenGL, by default, considers polygons that have what
+type of winding to be front-facing?
+
+15)(5 points)   Per #14, what's an easy way to remember the direction
+of winding that is consistent with rotations in 3D?  (This is
+not written in the book)
+
+Skip triangle strips.
+skip triangle fans.  (These things aren't relevant in OpenGL3.3+ core profile)
+I recommend reading the building solid objects section and code, but it's not on
+the homework, and we covered it in class.
+skip to page 104.
+
+16)(5 points)   What is the term used to describe the technique of
+eliminating geometry that we know whill never be seen?
+
+17)(5 points)  What is backface culling?  How is the back face determined?
+
+18)(5 points)  Which function allows polygons to be rendered as filled solids,
+outlines, or points only?
+
+Skip other primitives.  Go to page 114, subdivision and edges.
+
+19)(5 points)   OpenGL cannon draw non-convex polygons, but there is still
+a way to draw them.   How?
+
+20)(5 points)  What flag can be set to address distracting edges in the
+middle of a polygon?
+
+Skip other buffer tricks.  Go to page 121.  Read about stencil
+buffers, but there are no questions on it.
