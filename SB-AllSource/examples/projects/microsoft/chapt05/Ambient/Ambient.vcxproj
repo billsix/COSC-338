@@ -64,6 +64,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\contrib\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)Ambient.exe</OutputFile>
@@ -91,6 +92,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui_impl_glut.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="..\..\..\..\..\..\contrib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\..\..\..\src\chapt05\ambient\ambient.cpp" />
   </ItemGroup>
   <ItemGroup>
