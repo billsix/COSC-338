@@ -1,0 +1,94 @@
+DUE 01 APR 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+Read Chapter 5 of the OpenGL Superbible v4.  (you should figure out how
+to run the demo code too, and study the source, although that's
+not graded for this chapter.  Email me if you need help or have questions
+about it)
+
+The answers are mainly directly from the book.  Read all of Chapter 5
+of the book.  You can literally read the first question, read the book
+until you find it, write in your answer, read the next question, read
+the book until you find it.
+
+1) (5 points) What is simply a wavelength of light that is visible
+to the human eye?
+
+2) (5 points) The light that you see is a ______ of many different kinds
+of light, identified by their wavelengths
+
+3) (5 points) What is the visible spectrum?
+
+4) (5 points) What is black?  What is white?
+
+5) (5 points) Some photons are reflected and some photons are _______.
+
+6) (5 points) What makes light bright?
+
+Skip reading PC Color Hardware, the section is antiquated.
+Return reading on 180, Going Deeper
+
+7) (5 points) True or False.  The alpha channel, making a color go from 24 bits to
+32 bits, slows down the performance of the computer.
+
+8) (5 points) What floating point number is used to represent no intensity?
+
+9) (5 points) What floating point number is used to represent full intensity?
+
+10) (5 points) What type of shading causes the colors along the line to
+vary as they do htrough the color cube, from one color point to the other?
+
+
+11) (5 points) To enable the answer to 10, what flag does the opengl programmer
+need to send to glShadeModel?
+
+12) (5 points)  What are the three major kinds of light used in OpenGL?
+[
+13) (5 points)   ________ light doesn't come from any particular direction
+
+14) (5 points)  _______  light has a directional component that appears
+to come  from a particular direction and is reflected off a surface with
+an intensity proportional to the angle at which the light rays strike
+the surface.
+
+15) (5 points)   ______ light is a highly directional property,
+but it interacts more sharply with the surface and in a particular
+direction.
+
+16) (5 points) Generally, most scenes in the real world are illuminated
+by a _____ light containing an even mixture of all the colors.
+
+17) (5 points) When using lighting, we don't describe polygons as having a color,
+but rather consisting of _______________.
+
+18) (5 points)  Thus, the ____________________ components actually determine
+the percentage of incident light that is reflected.
+
+19) (5 points) What is the main call needed to enable lighting/materials?
+
+20) (5 points) this ____________________ is a zero cost way to add a simple
+offset to the results of OpenGL lighting calculations.
+
+21) (5 points) What is color tracking?
+
+22) (5 points)  How many independent light sources are available in OpenGL 2?
+
+23)(5 points)  A normal vector is a line pointed in a direction that is at
+a ___ degree angle to the surface of your polygon
+
+24) (5 points) What is a unit normal?
+
+25) (5 points) What is normalization?
+
+26) (5 points) If you take the cross product of two vectors, the resulting
+vector is ____________ to that plane.
+
+27) (5 points) If the last value (the w component) of the light position
+is 0.0, what does that indicate about the light?
+
+28) (5 points) What line from the spot code listing is actually what makes
+a positional light source into a spotlight?
+
+
+skip sections on shadows and the rest of the chapter

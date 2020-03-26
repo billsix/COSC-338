@@ -1,3 +1,77 @@
+Notes as of 25 MAR
+
+Homework 4 is due MON 30 MAR
+Homework 5 is due WED 01 APR
+
+Teleworking will be the default for the rest of the semester unless
+you are told otherwise.  Currently, we are using Google Meet at normal
+class times.  Invites will be sent over the class's slack channel.
+We may move to Zoom.
+
+Went over Chapter 5.  Ran ccube, triangle, jet, ambient, litjet,
+shinyjet.  Discussed the implementation of each of them.
+Showed the spot demo, but ran out of time to cover the implementation.  It's
+the most difficult demo in the chapter, I recommend
+reading it to try to figure out how it works, especially since
+the light source is moving.
+
+Discussed that I expect the final to be easier than
+the midterm.  The final will be mainly based off of the
+contents of the OpenGL Superbible book, as the homeworks
+are.
+
+There are 6 weeks remaining.  I updated the Syllabus to reflect
+remaining material.
+
+Towards each student's final
+paper, I recommend finding something that you are interested
+in studying on your own, and writing your paper about that.  I expect
+3 to 5 pages minimum.  Anything you learn along the way is worth including,
+even if it's not directly related to graphics (for instance, if you
+need to figure out what malloc/free in C do to fully understand some
+of the graphics code, spend the time to figure it out, and write about it)
+
+It could be studying/modifying
+the Minecraft implementation in Python, or the one in C. (Listed
+on COSC's README.md)
+
+It could be studying the spot demo from chapter 5 in detail, and porting
+it to OpenGL 3.3 Core profile mode (shaders).  It could be changing
+the movement in a project for some purpose.  Porting something
+from C++ to Python and what you learned.  Porting something From GLUT to GLFW.
+Explaining how pygments (in the Python Minecraft code) is different than GLFW.
+Fix certain negative graphical artifacts which are due to aliasing.
+
+Study how collision detection works in Minecraft.  Or in general, compare
+and contrast how different games deal with collision detection.
+
+Study raytracing.  Study a raytracer in 256 lines of C++
+https://github.com/ssloy/tinyraytracer/wiki/Part-1:-understandable-raytracing
+
+
+Study one or more of the projects from Code The Classics
+https://github.com/Wireframe-Magazine/Code-the-Classics
+(you can buy the book https://wireframe.raspberrypi.org/books/code-the-classics1)
+
+Study http://www.opengl-tutorial.org/
+
+Study https://learnopengl.com/Introduction.
+
+Study modelloading.
+
+Study how NDC could get rasterized in software, i.e., how are triangles
+filled, etc?
+https://github.com/ssloy/tinyrenderer
+
+Study a McNopper Demo or two https://github.com/McNopper/OpenGL
+(How to build it on Windows is on COSC-338's README.md)
+
+Study some subsection of a large Program.  SuperTuxKart.
+Neverball.
+
+This is meant to be open ended and self directed.
+
+
 Notes as of 08 MAR.
 
 Mid term will be a take home exam, assigned on MON 09 MAR, due
