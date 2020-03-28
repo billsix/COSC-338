@@ -66,7 +66,7 @@ the homework, and we covered it in class.
 skip to page 104.
 
 16)(5 points)   What is the term used to describe the technique of
-eliminating geometry that we know whill never be seen?
+eliminating geometry that we know will never be seen?
 
 17)(5 points)  What is backface culling?  How is the back face determined?
 
