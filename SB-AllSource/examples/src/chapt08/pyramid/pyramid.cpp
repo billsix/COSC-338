@@ -6,10 +6,14 @@
 #include "../../shared/math3d.h"    // 3D Math Library
 #include <stdlib.h>
 
+#include "imgui.h"
+#include "imgui_impl_glut.h"
+#include "imgui_impl_opengl2.h"
+
 // Rotation amounts
 static GLfloat xRot = 0.0f;
 static GLfloat yRot = 0.0f;
-
+static GLfloat extraradius = 0.0f;
 
 // Change viewing volume and viewport.  Called when window is resized
 void ChangeSize(int w, int h)
@@ -34,6 +38,7 @@ void ChangeSize(int w, int h)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    ImGui_ImplGLUT_ReshapeFunc(w, h);
     }
 
 
@@ -78,15 +83,12 @@ void SetupRC()
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     pBytes = gltLoadTGA("stone.tga", &iWidth, &iHeight, &iComponents, &eFormat);
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pBytes);
-    free(pBytes);
-    
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    free(pBytes);
     
-    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    glEnable(GL_TEXTURE_2D);
     }
 
 // Respond to arrow keys
@@ -107,14 +109,119 @@ void SpecialKeys(int key, int x, int y)
         xRot = (GLfloat)((const int)xRot % 360);
         yRot = (GLfloat)((const int)yRot % 360);
 
+
+    ImGui_ImplGLUT_SpecialFunc(key, x, y);
 	// Refresh the Window
 	glutPostRedisplay();
 	}
 
 
+void TimerFunction(int value)
+{
+    glutPostRedisplay();
+    glutTimerFunc(33, TimerFunction, 1);
+}
+
 // Called to draw scene
 void RenderScene(void)
     {
+
+    // Start the Dear ImGui frame
+    ImGui_ImplOpenGL2_NewFrame();
+    ImGui_ImplGLUT_NewFrame();
+
+    {
+        ImGui::Begin("Set Ambient Light");
+        // Light values
+        // Bright white light
+        // General BeginCombo() API, you have full control over your selection data and display type.
+        // (your selection data could be an index, a pointer to the object, an id for the object, a flag stored in the object itself, etc.)
+        const char* items[] = { "Modulate", "Replace"};
+        static const char* item_current = items[0];            // Here our selection is a single pointer stored outside the object.
+        if (ImGui::BeginCombo("Texture Env Mode", item_current, 0)) // The second parameter is the label previewed before opening the combo.
+        {
+
+            for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+            {
+                bool is_selected = (item_current == items[n]);
+                if (ImGui::Selectable(items[n], is_selected))
+                    item_current = items[n];
+                if (is_selected)
+                    ImGui::SetItemDefaultFocus();   // Set the initial focus when opening the combo (scrolling + for keyboard navigation support in the upcoming navigation branch)
+            }
+            if (item_current == items[0]) {
+                glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+            }
+            if (item_current == items[1]) {
+                glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+            }
+
+            ImGui::EndCombo();
+        }
+
+        {
+            const char* items[] = { "Linear", "Nearest" };
+            static const char* item_current = items[0];            // Here our selection is a single pointer stored outside the object.
+            if (ImGui::BeginCombo("Min Filter", item_current, 0)) // The second parameter is the label previewed before opening the combo.
+            {
+
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    bool is_selected = (item_current == items[n]);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = items[n];
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();   // Set the initial focus when opening the combo (scrolling + for keyboard navigation support in the upcoming navigation branch)
+                }
+                if (item_current == items[0]) {
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                }
+                if (item_current == items[1]) {
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+                }
+
+                ImGui::EndCombo();
+            }
+        }
+
+        {
+            const char* items[] = { "Linear", "Nearest" };
+            static const char* item_current = items[0];            // Here our selection is a single pointer stored outside the object.
+            if (ImGui::BeginCombo("Mag Filter", item_current, 0)) // The second parameter is the label previewed before opening the combo.
+            {
+
+                for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+                {
+                    bool is_selected = (item_current == items[n]);
+                    if (ImGui::Selectable(items[n], is_selected))
+                        item_current = items[n];
+                    if (is_selected)
+                        ImGui::SetItemDefaultFocus();   // Set the initial focus when opening the combo (scrolling + for keyboard navigation support in the upcoming navigation branch)
+                }
+                if (item_current == items[0]) {
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                }
+                if (item_current == items[1]) {
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+                }
+
+                ImGui::EndCombo();
+            }
+        }
+        {
+            ImGui::SliderFloat("Extra Camera Radius", &extraradius, -4.0f, 100.0f);
+        }
+
+
+        ImGui::End();
+    }
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glEnable(GL_TEXTURE_2D);
+
     M3DVector3f vNormal;
     M3DVector3f vCorners[5] = { { 0.0f, .80f, 0.0f },     // Top           0
                               { -0.5f, 0.0f, -.50f },    // Back left     1
@@ -128,7 +235,7 @@ void RenderScene(void)
     // Save the matrix state and do the rotations
     glPushMatrix();
         // Move object back and do in place rotation
-        glTranslatef(0.0f, -0.25f, -4.0f);
+        glTranslatef(0.0f, -0.25f, -4.0f - extraradius);
         glRotatef(xRot, 1.0f, 0.0f, 0.0f);
         glRotatef(yRot, 0.0f, 1.0f, 0.0f);
 
@@ -203,6 +310,13 @@ void RenderScene(void)
     // Restore the matrix state
     glPopMatrix();
 
+    // Rendering
+    ImGui::Render();
+    ImGuiIO& io = ImGui::GetIO();
+    glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
+    ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+
+
     // Buffer swap
     glutSwapBuffers();
     }
@@ -212,13 +326,43 @@ void RenderScene(void)
 int main(int argc, char *argv[])
     {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glutInitWindowSize(800, 600);
     glutCreateWindow("Textured Pyramid");
     glutReshapeFunc(ChangeSize);
     glutSpecialFunc(SpecialKeys);
     glutDisplayFunc(RenderScene);
+    glutTimerFunc(33, TimerFunction, 1);
     SetupRC();
+
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsClassic();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGLUT_Init();
+
+    // inlining of ImGui_ImplGLUT_InstallFuncs();
+    glutMotionFunc(ImGui_ImplGLUT_MotionFunc);
+    glutPassiveMotionFunc(ImGui_ImplGLUT_MotionFunc);
+#ifdef __FREEGLUT_EXT_H__
+    glutMouseWheelFunc(ImGui_ImplGLUT_MouseWheelFunc);
+#endif
+    glutMouseFunc(ImGui_ImplGLUT_MouseFunc);
+    glutKeyboardFunc(ImGui_ImplGLUT_KeyboardFunc);
+    glutKeyboardUpFunc(ImGui_ImplGLUT_KeyboardUpFunc);
+    glutSpecialUpFunc(ImGui_ImplGLUT_SpecialUpFunc);
+
+    ImGui_ImplOpenGL2_Init();
+
+
     glutMainLoop();
     
     return 0;
