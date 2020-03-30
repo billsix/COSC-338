@@ -1,0 +1,55 @@
+DUE 06 APR 2020
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+Read Chapter 8 of the OpenGL Superbible v4.  (you should figure out how
+to run the demo code too, and study the source, although that's
+not graded for this chapter.  Email me if you need help or have questions
+about it)
+
+The answers are mainly directly from the book.  Read all of Chapter 5
+of the book.  You can literally read the first question, read the book
+until you find it, write in your answer, read the next question, read
+the book until you find it.
+
+1) (5 points) What is it called when we apply image data to a geometric
+primitive?
+
+2) (5 points) Is it common for textures to have a one-to-one correspondance
+of texels to pixels?
+
+3) (5 points) What do many performance-minded developers avoid regarding
+the dimensions of textures?
+
+4) (5 points) Towards mapping the texture to the geometry, what do you need
+to specify for each vertex?
+
+5) (15 points) Texture coordinates as specified as floating point values
+between what range?
+
+6) (5 points) What OpenGL enabling call must be called to enable texturing?
+
+7) (10 points) In the pyramid demo, why does the shaded color of the pyramid
+come through and make the texture appear to be shaded?
+
+8) (5 points)  If instead of how it looks in 7, how would you replace
+fragment colors from the geometry using the texel color?
+
+9) (5 points) What does GL_DECAL do?
+
+10) (5 points) What is the process of calculating color fragments from
+a stretched or shrunken texture map called?
+
+11) (5 points) Which of the two main filters must be set?
+
+12) (5 points) How does linear filtering work?
+
+13) (5 points) What problem does texture wrapping solve?
+
+14) (10 points) Would cell shading work well with linear?
+
+15) (20 points) What are two common problems that mipmapping solves?
+
+16) (5 points) What function do you call to allocate a number of texture objects?
+
+17) (5 points) What function do you call to bind a texture to an object?
