@@ -113,6 +113,8 @@ In particular, how does the code warp the frustum to help explain perspective/or
 
 https://github.com/billsix/modelviewprojection/blob/master/mvpVisualization/frustum.vert
 
+(You'd need to study more than just that one thing, understand how all of it works.)
+
 #### Study tinyrender or tiny raytracer
 
 https://github.com/ssloy/tinyrenderer/wiki
@@ -128,7 +130,7 @@ a bit of math, more than we covered in class.
 
 #### Upgrade a program from OpenGL2 to OpenGL3.3 core profile.
 
-Language - C++
+Language - C++ (for OpenGL Blue book), Python for my modelviewprojection demos.
 
 The pyramid example in Ch8 of the BlueBook would be an excellent one to do,
 as it involves simple transformations, simple geometry, lighting, and texturing. 
@@ -146,7 +148,10 @@ https://github.com/billsix/Craft , modified from https://github.com/fogleman/Cra
 to use core profile, and to be easily compiled with Visual Studio 2019 (via 
 VS2019's cmake integration)
 
-Same questions as the python one above.  Also, how to do the shader's work?  How does fog work,
+Same questions as the python one above (among others, movement, controller
+support, etc).  But also, how to do the shader's work?  
+
+How does fog work,
 now that the shader has complete control over the fog?  What equations does the shader
 use, and how do they compare to the equations written in the first half of the opengl 
 superbible v4 book?  How does the author use matricies?  Are they in a matrix stack?
