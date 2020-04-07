@@ -4,6 +4,11 @@
 // Program by Benjamin Lipchak
 
 #include "../../shared/gltools.h"
+
+#include "imgui.h"
+#include "imgui_impl_glut.h"
+#include "imgui_impl_opengl3.h"
+
 #undef FREEGLUT_VERSION_2_0
 
 GLint windowWidth = 1024;                // window size
@@ -20,6 +25,8 @@ GLint flickerLocation = -1;
 
 GLfloat cameraPos[] = {100.0f, 150.0f, 200.0f, 1.0f};
 GLdouble cameraZoom = 0.6;
+
+
 
 #define MAX_INFO_LOG_SIZE 2048
 
@@ -60,6 +67,59 @@ void Relink()
     Link(GL_FALSE);
 }
 
+// Our state
+static bool show_demo_window = true;
+static bool show_another_window = false;
+static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+void my_display_code()
+{
+    // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
+    if (show_demo_window)
+        ImGui::ShowDemoWindow(&show_demo_window);
+
+    // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+    {
+        static bool shaderWindow = true;
+        ImGui::Begin("Shader window", &shaderWindow);
+        static float f = 0.0f;
+        static int counter = 0;
+
+        ImGui::Text("Hello from shader window!");
+
+        static bool vertexShader = true;
+        static bool fragmentShader = true;
+        if (ImGui::Checkbox("Vertex Shader", &vertexShader))
+          {
+            if (vertexShader)
+              {
+                glAttachShader(progObj, vShader);
+              }
+            else
+              {
+                glDetachShader(progObj, vShader);
+              }
+            Relink();
+          }
+        if (ImGui::Checkbox("Fragment Shader", &fragmentShader))
+          {
+            if (fragmentShader)
+              {
+                glAttachShader(progObj, fShader);
+              }
+            else
+              {
+                glDetachShader(progObj, fShader);
+              }
+            Relink();
+          }
+        ImGui::End();
+    }
+
+}
+
+
+
 // Called to draw scene objects
 void DrawModels(void)
 {
@@ -68,7 +128,7 @@ void DrawModels(void)
     glNormal3f(0.0f, 1.0f, 0.0f);
     glBegin(GL_QUADS);
         glVertex3f(-100.0f, -25.0f, -100.0f);
-        glVertex3f(-100.0f, -25.0f, 100.0f);		
+        glVertex3f(-100.0f, -25.0f, 100.0f);
         glVertex3f(100.0f,  -25.0f, 100.0f);
         glVertex3f(100.0f,  -25.0f, -100.0f);
     glEnd();
@@ -128,11 +188,11 @@ void RenderScene(void)
     }
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 
+    gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2],
               0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
     glViewport(0, 0, windowWidth, windowHeight);
-    
+
     // Clear the window with current clearing color
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -166,10 +226,10 @@ void RenderScene(void)
 
         needsValidation = GL_FALSE;
     }
-    
+
     // Draw objects in the scene
     DrawModels();
-    
+
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glDisable(GL_DEPTH_TEST);
     //gltPrintf(GLUT_BITMAP_9_BY_15, 0, 3, "Controls:");
@@ -186,6 +246,19 @@ void RenderScene(void)
         //gltPrintf(GLUT_BITMAP_9_BY_15, 10, 0, "GL Error!");
     }
 
+    // Start the Dear ImGui frame
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGLUT_NewFrame();
+
+    my_display_code();
+
+    // Rendering
+    ImGui::Render();
+    ImGuiIO& io = ImGui::GetIO();
+    glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+
     // Flush drawing commands
     glutSwapBuffers();
 
@@ -193,15 +266,26 @@ void RenderScene(void)
         glutPostRedisplay();
 }
 
+///////////////////////////////////////////////////////////
+// Called by GLUT library when idle (window not being
+// resized or moved)
+void TimerFunction(int value)
+    {
+     // Redraw the scene with new coordinates
+    glutPostRedisplay();
+    glutTimerFunc(33,TimerFunction, 1);
+    }
+
+
 // This function does any needed initialization on the rendering
-// context. 
+// context.
 void SetupRC()
 {
     GLint success;
     const GLchar *vsStringPtr[1];
     const GLchar *fsStringPtr[1];
 
-    GLchar vsString[] = 
+    GLchar vsString[] =
         "void main(void)\n"
         "{\n"
         "    // This is our Hello World vertex shader\n"
@@ -221,7 +305,7 @@ void SetupRC()
         "    gl_FrontSecondaryColor = (ndc * 0.5) + 0.5;\n"
         "}\n";
 
-    GLchar fsString[] = 
+    GLchar fsString[] =
         "uniform float flickerFactor;\n"
         "\n"
         "void main(void)\n"
@@ -237,9 +321,9 @@ void SetupRC()
     glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 
     // Make sure required functionality is available!
-    if (!GLEE_VERSION_2_0 && (!GLEE_ARB_vertex_shader || 
-                              !GLEE_ARB_fragment_shader || 
-                              !GLEE_ARB_shader_objects || 
+    if (!GLEE_VERSION_2_0 && (!GLEE_ARB_vertex_shader ||
+                              !GLEE_ARB_fragment_shader ||
+                              !GLEE_ARB_shader_objects ||
                               !GLEE_ARB_shading_language_100))
     {
         //gltPrintf(GLUT_BITMAP_9_BY_15, 0, 3, "GLSL extensions not available!");
@@ -371,6 +455,8 @@ void ProcessMenu(int value)
 
 void KeyPressFunc(unsigned char key, int x, int y)
 {
+  ImGui_ImplGLUT_KeyboardFunc(key, x, y);
+
     switch (key)
     {
     case 'x':
@@ -407,6 +493,7 @@ void KeyPressFunc(unsigned char key, int x, int y)
 
 void SpecialKeys(int key, int x, int y)
 {
+    ImGui_ImplGLUT_SpecialFunc(key, x, y);
     switch (key)
     {
     case GLUT_KEY_LEFT:
@@ -433,6 +520,9 @@ void ChangeSize(int w, int h)
 {
     windowWidth = w;
     windowHeight = h;
+    // imgui
+    ImGui_ImplGLUT_ReshapeFunc(w,h);
+
 }
 
 void MouseWheel(int wheel_number, int direction, int x, int y)
@@ -445,10 +535,11 @@ void MouseWheel(int wheel_number, int direction, int x, int y)
 int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glutInitWindowSize(windowWidth, windowHeight);
     glutCreateWindow("GLSL Shaders Demo");
     glutReshapeFunc(ChangeSize);
+    glutTimerFunc(33, TimerFunction, 1);
     glutKeyboardFunc(KeyPressFunc);
     glutSpecialFunc(SpecialKeys);
     glutDisplayFunc(RenderScene);
@@ -466,6 +557,32 @@ int main(int argc, char* argv[])
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     SetupRC();
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsClassic();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGLUT_Init();
+
+    // inlining of ImGui_ImplGLUT_InstallFuncs();
+    glutMotionFunc(ImGui_ImplGLUT_MotionFunc);
+    glutPassiveMotionFunc(ImGui_ImplGLUT_MotionFunc);
+#ifdef __FREEGLUT_EXT_H__
+    glutMouseWheelFunc(ImGui_ImplGLUT_MouseWheelFunc);
+#endif
+    glutMouseFunc(ImGui_ImplGLUT_MouseFunc);
+    glutKeyboardUpFunc(ImGui_ImplGLUT_KeyboardUpFunc);
+    glutSpecialUpFunc(ImGui_ImplGLUT_SpecialUpFunc);
+
+    ImGui_ImplOpenGL3_Init();
+
 
     glutMainLoop();
 
