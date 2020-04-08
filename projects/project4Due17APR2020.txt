@@ -1,0 +1,50 @@
+Purpose:
+
+To demonstrate that you know how use a shader in Python,
+using COSC-338/projects/project4/demo.py as a base
+
+(Make sure to set up a virtual environment, using modelviewprojection's
+requirements.txt your environment)
+
+This project should take a couple of hours at most.
+
+You can use SB-AllSource/examples/src/chapt15/shaders/shaders.cpp
+as a baseline to see how to make a basic shader program.
+
+Enable openGL version 3.0, or 2.0, anything but 1.4.
+
+The python binding to opengl have a simpler method
+of compiling shaders.
+
+import OpenGL.GL.shaders as shaders
+
+vs = shaders.compileShader(vstring, GL_VERTEX_SHADER)
+fs = shaders.compileShader(fString, GL_FRAGMENT_SHADER)
+shader = shaders.compileProgram(vs, fs)
+
+Multiline strings in Python don't need \n, nor multiple sets of "" ""
+
+Instead, you can
+
+vs = """
+do a multiline string in python
+by
+using
+  three quotes
+  at both the front and the back
+"""
+
+(These are not the only function that you need, but I'm listing
+them here because they differ from the OpenGL Blue book, because
+they are wrappers)
+
+
+1) (50 points) Demonstrate that you can use a shader
+to mimic the fixed function pipeline, so that the user
+can move around the scene, and view the two paddles
+and the square
+
+2) (50 points) Make a copy of demo.py to demo2.py,
+and show how you can turn all of the paddle's and square's
+colors to always be white, regardless of the color data
+that was sent in.
