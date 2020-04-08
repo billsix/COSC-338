@@ -1,20 +1,44 @@
+Due: 17 APR 2020
+
 Purpose:
 
-To demonstrate that you know how use a shader in Python,
+To demonstrate that you know how implement shader programs in Python,
 using COSC-338/projects/project4/demo.py as a base
+
+1) (50 points) Demonstrate that you can use a shader
+to mimic the fixed function pipeline, so that the user
+can move around the scene, and view the two paddles
+and the square
+
+2) (50 points) Make a copy of demo.py to demo2.py,
+and show how you can, within the shader, turn all
+of the paddle's and square's
+colors to always be white, regardless of the color data
+that was sent in per vertex via glColor3f.
+
+Notes-------
+
 
 (Make sure to set up a virtual environment, using modelviewprojection's
 requirements.txt your environment)
 
-This project should take a couple of hours at most.
+This project should take a couple of hours at most. Talk
+to me in class or contact my if you are having issues.
 
-You can use SB-AllSource/examples/src/chapt15/shaders/shaders.cpp
-as a baseline to see how to make a basic shader program.
+You can inspect SB-AllSource/examples/src/chapt15/shaders/shaders.cpp
+to see how to embed shader programs into the code, as the ones
+embedded there are fairly simple.
 
-Enable openGL version 3.0, or 2.0, anything but 1.4.
+Within the Python code,
+
+-Enable openGL version 3.0, or 2.0, anything but 1.4.
+
+- Embed your two shaders
 
 The python binding to opengl have a simpler method
-of compiling shaders.
+of compiling shaders than the C++ version in the book.
+
+The following 4 lines are useful:
 
 import OpenGL.GL.shaders as shaders
 
@@ -37,14 +61,3 @@ using
 (These are not the only function that you need, but I'm listing
 them here because they differ from the OpenGL Blue book, because
 they are wrappers)
-
-
-1) (50 points) Demonstrate that you can use a shader
-to mimic the fixed function pipeline, so that the user
-can move around the scene, and view the two paddles
-and the square
-
-2) (50 points) Make a copy of demo.py to demo2.py,
-and show how you can turn all of the paddle's and square's
-colors to always be white, regardless of the color data
-that was sent in.
