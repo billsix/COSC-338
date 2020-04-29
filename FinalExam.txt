@@ -1,0 +1,182 @@
+COSC-338 Final Exam.
+
+DUE WED 06 MAY 2020, at 11:59 PM.
+
+Email solutions, in plain text format (.txt file), to wesix@smcm.edu
+
+This is out of 174 points, which will be converted to a 100% scale in blackboard.
+
+IF YOU HAVE NOT "git pull"ED FROM https://github.com/billsix/modelviewprojection
+THROUGHOUT THE SEMESTER, YOU NEED TO EITHER GIT PULL, DO A NEW LOCAL CLONE,
+OR VISIT THE GITHUB PAGE TO VIEW THE SOURCE OF THE DEMOS THROUGH A WEBBROWSER.
+I HAVE MODIFIED THE DEMOS THROUGHOUT THE SEMESTER.
+IF YOU CLONED ON WEEK ONE OF THE CLASS AND HAVE NOT UPDATED YOUR LOCAL REPO, I DO
+NOT KNOW IF THE CODE THAT YOU HAVE IS RELEVANT FOR THIS FINAL, AND
+IT WILL NOT BE A VALID EXCUSE.  SO UPDATE OR READ THE CODE FROM
+THE GITHUB PAGE.
+
+
+(10 points)
+1) What are the main 3 types of lighting in OpenGL?
+
+(10 points)
+2) For diffuse lighting (page 584 of the bluebook v4), we normalize
+the light vector, we normalize the normal vector, and then
+take the dot product of the two normalized vectors.  Given the
+geometric definiton of the dot product on wikipedia,
+what is the result of the dot product of two normalized
+vectors?
+
+(5 points)
+3) What is the range for texture coordinates in the s and t directions?
+(sometimes called u and v directions)
+
+(From Chapter 8)
+(15 points)
+4) Unlike pixmaps being drawn to the color buffer, when a texture
+is applied to geometry, there is almost never a one-to-one
+correspondence between texels in the texture map and pixels
+on the screen.  What is the name of calculating color
+fragments from a stretched or shrunken texture map?
+
+
+(Until told otherwise, the Following Questions Are Mainly Related To
+Modelviewprojection's Demo20. DONT BE LOOKING AT OLD CODE, GIT PULL
+OR LOOK AT THE CODE IN YOUR WEBBROWSER https://github.com/billsix/modelviewprojection)
+
+(In all of the questions, the code to look at is either in demo.py and its comments,
+or in the associated vertex shader, the .vert file)
+
+(9 points)
+(Hint: look in demo.py)
+5) Name at least 3 OpenGL functions that are no longer available in Open 3.3
+Core Profile.
+
+(5 points)
+(Hint: look in demo.py)
+6) What are the two main types of shaders that we used in this class?
+
+(15 points)
+(Hint: not explicitly stated in demo.py.  This one requires understanding
+of which shader type actually colors the pixel, which was emphasized
+in project 4)
+7) If the user of your graphics program, which is based on shaders, resizes
+the window so that the framebuffer is twice as big both in width and in height,
+which one of the two shader types from the previous question will have 4
+times the number of invocations?
+
+(15 points)
+(Hint: in demo.py)
+8) In project 4, a lot of data, like the vertices, the modelviewprojection
+matrix, the normalmatrix, etc, were implicitly passed from the OpenGL
+library into the shader program's variables which had predefined names.
+("Implicitly" meaning that you, the OpenGL programmer, had
+no choice/control in the matter).
+These variables are called "builtin variables", such as listed on page 536-7 of the OpenGL bluebook v4.
+
+In OpenGL 3.3 Core Profile, most of those builtin variables are removed,
+and the onus both of coming up with shader variable names, and of linking data
+into shader variables is on the OpenGL programmer.
+
+What type of OpenGl "object" does the programmer
+generate, bind (aka make the active object), and configure
+to specify how vertex/color/normal/matrix/uniform
+data is passed into the shader's variables?
+
+(15 points)
+(Hint: in demo.py)
+9) Given that glVertex is gone in OpenGL 3.3 Core Profile,
+what type of OpenGL "object" is our modelspace
+vertex data stored in, so that the object from the previous question can send the vertex
+data into an invocation of the vertex shader?
+
+(5 points)
+(Hint: in demo.py)
+10) In OpenGL 3.3 Core Profile, after the objects from the previous two questions
+are configured, what OpenGL function do you need to call to actually draw
+triangles?  (Without calling this function for triangles, no shader programs
+will actually be executed).
+
+Hint, if you search demo 20's demo.py for
+GL_TRIANGLES, you will find it.
+
+(10 points)
+(Hint: in the vertex shader)
+11) Given that we defined the perspective projection, in camera space,
+as scaling the x value based off the of camera space's z value,
+then scaling the y value similarly, translating the center of
+the rectangular prism to the origin, and scaling
+to NDC, what is the matrix form in the vertex shader of the third
+step, i.e. "translate_to_origin"?
+
+(10 points)
+(Hint: in the vertex shader)
+12) From the previous question, why are the translation for the x and y,
+which are the top two coordinates in the fourth column, both 0.0?
+
+(5 points)
+(Hint: From demo 21, the vertex shader)
+13) Since a sequence of matrix multiplications can be condensed into
+one matrix, what are the values for the matrix "camera_space_to_ndc_space"
+
+(10 points)
+(Hint: From demo 22, demo.py)
+14) The matrix defined in demo21 was dependent upon the camera space's
+z value.  What is an advantage of removing the camera space's z value
+from the perspective projection matrix?
+
+(15 points)
+(Hint: From demo 23, the vertex shader)
+15) In demo 22 in the projection step within the vertex shader,
+we outputted clip space instead of outputting NDC. (Technically
+we never actually used 3 dimensional NDC, it was always 4D clip space,
+but throughout the class, I called clip space with a w value of 1 as "NDC")
+
+The matrix was
+     mat4 camera_space_to_clip_space = transpose(mat4(
+          -nearZ/right,   0.0,        0.0,                                 0.0,
+          0.0,            -nearZ/top, 0.0,                                 0.0,
+          0.0,            0.0,        2.0*(-cameraSpace.z)/(nearZ - farZ), (-cameraSpace.z)*(-(farZ + nearZ)/(nearZ - farZ)),
+          0.0,            0.0,        0.0,                                 -cameraSpace.z));
+
+This matrix is multiplied with the camera space vector,
+[cameraSpace.x, cameraSpace.y, cameraSpace.z, cameraSpace.w]'
+
+What property of the camera space vector's component(s), preserved by all of the transformations
+from modelspace, to world space, to camera space, allows us to modify
+"camera_space_to_clip_space" into the following "camera_space_to_clip_space1"?:
+
+     mat4 camera_space_to_clip_space1 = transpose(mat4(
+          -nearZ/right,   0.0,        0.0,                                 0.0,
+          0.0,            -nearZ/top, 0.0,                                 0.0,
+          0.0,            0.0,        2.0*(-cameraSpace.z)/(nearZ - farZ), (-cameraSpace.z)*(-(farZ + nearZ)/(nearZ - farZ)),
+          0.0,            0.0,        -1.0,                                0.0));
+
+
+Hint:
+Only the bottom row changed.
+
+Further hint:
+In "camera_space_to_clip_space", per the matrix multiplication, clip_space.w is defined as
+   clip_space.w = 0*camera_space.x + 0*camera_space.y + 0*camera_space.z    + (-cameraSpace.z * cameraSpace.w)
+In "camera_space_to_clip_space1", per the matrix multiplication, clip_space.w is defined as
+   clip_space.w = 0*camera_space.x + 0*camera_space.y + -1*(camera_space.z) + 0*(-cameraSpace.w)
+
+(10 points)
+(Hint: From demo 23, the vertex shader)
+16) Now that the fourth row doesn't have cameraspace.z in it,
+we want to eliminate it from the third row.
+If such a transformation to the matrix were to exist (and it does),
+what two important properties of the resulting matrix must we ensure as constraints, to ensure that
+1) the frustum ends up in NDC after being clipped, and that
+2) the depth tests still functions correctly for hidden surface
+removal.
+
+(Hint: from Demo 24, the vertex shader)
+(10 points)
+17)  What is the standard OpenGL perspective projection matrix that
+we eventually derived?
+
+
+It's been a pleasure teaching Computer Graphics to you all this semester.  Have a safe summer, and good luck
+in your future endeavors.
