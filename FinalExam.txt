@@ -121,9 +121,10 @@ one matrix, what are the values for the matrix "camera_space_to_ndc_space"
 
 (10 points)
 (Hint: From demo 22, demo.py)
-14) The matrix defined in demo21 was dependent upon the camera space's
-z value.  What is an advantage of removing the camera space's z value
-from the perspective projection matrix?
+14) The perspective projection matrix defined in demo21 was dependent
+upon the camera space's z value.  What is an advantage of manipulating the
+perspective projection matrix into an equivalent form that is independent
+of the camera space's z value?
 
 (15 points)
 (Hint: From demo 23, the vertex shader)
