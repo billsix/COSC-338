@@ -161,7 +161,7 @@ Further hint:
 In "camera_space_to_clip_space", per the matrix multiplication, clip_space.w is defined as
    clip_space.w = 0*camera_space.x + 0*camera_space.y + 0*camera_space.z    + (-cameraSpace.z * cameraSpace.w)
 In "camera_space_to_clip_space1", per the matrix multiplication, clip_space.w is defined as
-   clip_space.w = 0*camera_space.x + 0*camera_space.y + -1*(camera_space.z) + 0*(-cameraSpace.w)
+   clip_space.w = 0*camera_space.x + 0*camera_space.y + -1*(camera_space.z) + 0*cameraSpace.w
 
 (10 points)
 (Hint: From demo 23, the vertex shader)
